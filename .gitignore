@@ -1,0 +1,10 @@
+# Python .pyc files
+__pycache__/
+*.py[cod]
+*~
+
+# PyCharm files
+.idea
+
+# Other
+tmp/
