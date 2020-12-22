@@ -31,7 +31,7 @@ class Solution1:
 
 def test_defanging_address():
     inp = ["1.1.1.1", "255.100.50.0"]
-    out = "1[.]1[.]1[.]1", "255[.]100[.]50[.]0"
+    out = ["1[.]1[.]1[.]1", "255[.]100[.]50[.]0"]
     sol = Solution()
     for i in range(len(inp)):
         test_res = sol.defangIPaddr(inp[i])
