@@ -37,13 +37,13 @@ class Solution:
         parens = {"(": ")",
                   "{": "}",
                   "[": "]"
-                   }                  # Keys = Opening parenthesis, Values - slosing parenthesis
+                   }                  # Keys = Opening parentheses, Values - slosing parentheses
 
         for item in s:
             if item in parens.keys():
-                stack.push(item)            # Push all opening parenthesis
+                stack.push(item)            # Push all opening parentheses
                 continue
-            if stack.isEmpty():             # False because empty stask and closing parenthesis
+            if stack.isEmpty():             # False because empty stask and closing parentheses
                 return False
             pop_item = stack.pop()
             if item != parens[pop_item]:    # if item == ")" pop_item must be "(", and not "["
