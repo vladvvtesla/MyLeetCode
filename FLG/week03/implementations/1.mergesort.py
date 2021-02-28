@@ -1,5 +1,19 @@
 """
 
+
+Mergesort Time Complexity:
+Mergesort uses at most N * lg N  compares and at most 6 * N * lg N
+array accesses to sort any array of size N
+
+Mergesort Space Complexity:
+Mergesort uses extra space proportional to N
+
+Mergesort has too much overhead for tiny subarrays
+
+Stop if already sorted:
+Is the biggest item in the first half is smaller than the smallest item in the second hulf
+Helps for partially ordered array
+
 """
 
 
@@ -25,11 +39,13 @@ def merge(a: list, b: list):
     :param b:   second sorted array
     :return c:  sorted array after merging
     """
-    assert isSorted(a)     # Precondition: is sorted
-    assert isSorted(b)     # Precondition: is sorted
+    assert isSorted(a)                  # Precondition: is sorted
+    assert isSorted(b)                  # Precondition: is sorted
+
+    if a[-1] <= b[0]: c = a + b         # Stop if already sorted:
 
     c = [0] * (len(a) + len(b))
-    i = k = n = 0                 # indexes for arrays a, b, c
+    i = k = n = 0                       # indexes for arrays a, b, c
     while i < len(a) and k < len(b):
         if a[i] <= b[k]:
             c[n] = a[i]
