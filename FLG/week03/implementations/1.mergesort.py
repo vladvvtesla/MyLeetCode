@@ -68,14 +68,17 @@ def merge(a: list, b: list):
     return c
 
 
-def isSorted(a):
+def isSorted(a, asc=True):
     """
     Check if an array is sorted
     :param a: array
+    :param asc: ascending or descending
     :return: boolean
     """
+    s = 2*int(asc) - 1      # sign:   int(True)=1 => 2*1-1 = 1
+
     for i in range(len(a)-1):
-        if a[i+1] < a[i]:
+        if s * a[i] > s * a[i+1]:
             return False
     return True
 
