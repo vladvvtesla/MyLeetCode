@@ -1,6 +1,5 @@
 """
 
-
 Mergesort Time Complexity:
 Mergesort uses at most N * lg N  compares and at most 6 * N * lg N
 array accesses to sort any array of size N
