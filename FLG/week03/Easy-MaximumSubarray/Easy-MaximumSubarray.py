@@ -1,8 +1,11 @@
 """
 Easy -  Maximum Subarray
 
+Runtime: 64 ms, faster than 78.58% of Python3 online submissions for Maximum Subarray.
+Memory Usage: 15.1 MB, less than 15.44% of Python3 online submissions for Maximum Subarray.
 
--- Using Dynamic programming --
+
+-- Using Dynamic Programming --
 Perfect explanatioin: Igor Kleiner -  https://youtu.be/-9xQVtqWbRQ
 
 There are several methods for solving this problem
@@ -28,7 +31,11 @@ F-(n) <- F-(n-1) <- F-(n-2) <- ... <- F-(1)     :  O (N)
 and
 F1 = max[F+(1), F-(1)]
 
-[5, -3, 6, -7, 6]
+F+(i) = Ai + max[F+(i+1), 0]
+Zero, because we will ignore negative numbers
+
+
+[5, -3, 6, -7, 6]`
 
 A1 | A2 | A3 | A4 | A5 |      A
  5 | -3 |  6 | -7 |  6 |
@@ -39,44 +46,34 @@ A1 | A2 | A3 | A4 | A5 |      A
  F1 = max[8, 6] = 8    [5, -3, 6]
 
 
-
 Time complexity:  O ( N )
 Space complexity: O ( const )
 """
 
-
-
 class Solution:
     def maxSubArray(self, nums):
-        pass
 
+        import math
 
-"""
-    def maxSubArray(self, nums):
-        cur = nums[0]  # current max sum
-        glo = nums[0]  # global max sum
+        n = len(nums)
+        f_plus = [0]*n
+        f_minus = [0]*n
 
-        for idx, item in enumerate(nums):
-            if idx == 0:                    #  pass the first item
-                continue
+        f_plus[-1] = nums[-1]                 # Basic case
+        f_minus[-1] = -math.inf               # Basic case
 
-            new_cur = cur + item
+        for i in range(n-2, -1, -1):          # n=5 ==> 4th we know, we'll fill 3,2,1,0
+            f_plus[i] = nums[i] + max(f_plus[i+1], 0)
+            f_minus[i] = max(f_plus[i+1], f_minus[i+1])
 
-            if new_cur >= cur:
-                cur = new_cur
-            else:
-                cur = item
+        res = max(f_plus[0], f_minus[0])
 
-            glo = max(cur, glo)
-
-        return glo
-"""
-
+        return res
 
 
 def test_maxSubArray():
-    inp = [[-2,1,-3,4,-1,2,1,-5,4], [1], [0], [-1], [-100000], [-100,1,1,1,1,1,-5]]
-    out = [6, 1, 0, -1, -100000, 0]
+    inp = [[5,-3,6,-7,6], [-2,1,-3,4,-1,2,1,-5,4], [1], [0], [-1], [-100000], [-100,1,1,1,1,1,-5] ]
+    out = [8, 6, 1, 0, -1, -100000, 5]
     sol = Solution()
     for k,item in enumerate(inp,1):
         test_res = sol.maxSubArray(item)
