@@ -11,7 +11,6 @@ Consequence: ~NlgN compares when all keys equal
 Bottom line: Randomized quicksort with 3-way partitioning reduces running time from linearithmic to linear in a broad class of applications.
 Quicksort with 3-way partitioning is most effective when the input array has a few distinct items?
 
-
 Dijkstra 3-way partitioning
 
 Engineering a system sort
@@ -31,31 +30,20 @@ def quicksort(a, lo, hi):
     :param lo: low Index
     :param hi: high index
     """
-    print('a:', a)
-
-    import random
-    random.shuffle(a)            # Shuffle array a
-    print('shuffled a:', a)
-
     if hi <= lo:
         return
     lt, gt = lo, hi
     i = lo
     while i <= gt:
-        if a[i] < a[lo]:
-            lt,i = i,lt
+        if a[i] < a[lt]:
+            a[lt],a[i] = a[i],a[lt]
             lt += 1
             i += 1
         elif a[i] > a[lo]:
-            gt,i = i,gt
+            a[gt],a[i] = a[i],a[gt]
             gt -= 1
         else:
             i += 1
-        print('i:', i)
-        print('lo:', lo)
-        print('lt:', lt)
-        print('gt:', gt)
-        print('a:', a)
 
     quicksort(a, lo, lt - 1)
     quicksort(a, gt + 1, hi)
@@ -79,22 +67,27 @@ def isSorted(a, asc=True):
 
 
 def test_quicksort():
+    import random
+
     a = [6,2,9,2,5]
     a_sorted = [2,2,5,6,9]
+    random.shuffle(a)             # Shuffle array only onсу
     quicksort(a, 0, len(a)-1)
     print("Test", "1.", "OK" if a == a_sorted else "Failed")
     print()
 
     b = [1,0,0,0,0]
     b_sorted = [0,0,0,0,1]
-    quicksort(b, 0, len(a)-1)
+    random.shuffle(b)             # Shuffle array only onсу
+    quicksort(b, 0, len(b)-1)
     print("Test", "2.", "OK" if b == b_sorted else "Failed")
     print()
 
     c = [1]
-    b_sorted = [1]
-    quicksort(b, 0, len(a)-1)
-    print("Test", "3.", "OK" if b == b_sorted else "Failed")
+    c_sorted = [1]
+    random.shuffle(c)
+    quicksort(c, 0, len(c)-1)
+    print("Test", "3.", "OK" if c == c_sorted else "Failed")
     print()
 
 
