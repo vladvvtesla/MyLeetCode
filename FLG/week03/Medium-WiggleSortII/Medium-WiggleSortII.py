@@ -12,6 +12,10 @@ Time complexity: O(N lgN)
                  copy aux back to a:  O(N)
 Space Complexity: O(N) plus extra space for auxilary array
 
+Success, but too slow
+Runtime: 2740 ms, faster than 10.73% of Python3 online submissions for Wiggle Sort II.
+Memory Usage: 19.4 MB, less than 8.50% of Python3 online submissions for Wiggle Sort II.
+
 """
 
 class Solution:
@@ -52,10 +56,13 @@ class Solution:
         aux = [0] * n
 
         for k in range(n):
+        # start to fill aux from middle and from the end of a =>
+        # aux[0] = a[mid-1]
+        # aux[1] = a[n-1]
             if k % 2 == 0:
-                aux[k] = a[k//2]
+                aux[k] = a[mid - k//2 - 1]
             else:
-                aux[k] = a[k//2 + mid]
+                aux[k] = a[n - (k//2 + 1)]
 
         for k in range(n):               # copy all items from wig to a
             a[k] = aux[k]
@@ -63,7 +70,7 @@ class Solution:
 
 def test_wiggleSort():
     inp = [[1,5,1,1,6,4], [1,3,2,2,3,1], [1,1,1,2,2,2], [5,5,5,4,4,4,4], [4,5,5,6]]
-    out = [[1,4,1,5,1,6], [1,2,1,3,2,3], [1,2,1,2,1,2], [4,5,4,5,4,5,4], [5,6,4,5]]
+    out = [[1,6,1,5,1,4], [2,3,1,3,1,2], [1,2,1,2,1,2], [4,5,4,5,4,5,4], [5,6,4,5]]
     sol = Solution()
     for i in range(len(inp)):
         sol.wiggleSort(inp[i])
