@@ -1,27 +1,42 @@
 """
-350. Intersection of Two Arrays II
+350. Easy - Intersection of Two Arrays II
 
-Runtime: 368 ms, faster than 5.62% of Python3 online submissions for Intersection of Two Arrays II.
-Memory Usage: 14.4 MB, less than 71.44% of Python3 online submissions for Intersection of Two Arrays II.
-
+Success, but too slow
+Runtime: 96 ms, faster than 6.24% of Python3 online submissions for Intersection of Two Arrays II.
+Memory Usage: 14.5 MB, less than 10.29% of Python3 online submissions for Intersection of Two Arrays II.
 """
 
 
 class Solution:
-    def insert_sort(self, a):
-        """ Insertion Sort implementation"""
-        n = len(a)
-        for i in range(n):
-            for j in range(i, 0, -1):
-                if a[j] <= a[j - 1]:
-                    a[j], a[j - 1] = a[j - 1], a[j]
-                else:
-                    break
+    def quicksort(self, a, lo, hi):
+        """
+        3-way quicksort: Python implementation
+        :param a:  Array
+        :param lo: low Index
+        :param hi: high index
+        """
+        if hi <= lo:
+            return
+        lt, gt = lo, hi
+        i = lo
+        while i <= gt:
+            if a[i] < a[lt]:
+                a[lt], a[i] = a[i], a[lt]
+                lt += 1
+                i += 1
+            elif a[i] > a[lo]:
+                a[gt], a[i] = a[i], a[gt]
+                gt -= 1
+            else:
+                i += 1
+
+        self.quicksort(a, lo, lt - 1)
+        self.quicksort(a, gt + 1, hi)
 
 
     def intersect(self, nums1, nums2):
-        self.insert_sort(nums1)
-        self.insert_sort(nums2)
+        self.quicksort(nums1, 0, len(nums1)-1)
+        self.quicksort(nums2, 0, len(nums2)-1)
 
         # Choose the biggest array
         if len(nums1) >= len(nums2):
