@@ -15,7 +15,6 @@ Space Complexity: O(N) plus extra space for auxilary array
 Success, but too slow
 Runtime: 2740 ms, faster than 10.73% of Python3 online submissions for Wiggle Sort II.
 Memory Usage: 19.4 MB, less than 8.50% of Python3 online submissions for Wiggle Sort II.
-
 """
 
 class Solution:
