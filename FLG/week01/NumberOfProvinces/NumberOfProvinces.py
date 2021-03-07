@@ -3,11 +3,16 @@ Runtime: 204 ms, faster than 44.55% of Python3 online submissions for Number of 
 Memory Usage: 14.8 MB, less than 53.20% of Python3 online submissions for Number of Provinces.
 """
 
-class WQUPC():
+"""
+Union command:  connect two objects
+Find/connected query: is there a path connecting the two objects
+"""
+
+class UnionFind():
     """" Weighted  QuickUnion with Path Compression.  Coursera Sedgewick 1 w1"""
     def __init__(self, n):
-        """id is integer array
-            id[i] is parent of i
+        """ self.id is an array of integer
+            self.id[i] is parent of i
             root of i is id[id[...id[i]...]]   # keep going until it doesn't change
         """
         self.id = [i for i in range(n)]         # the constructor: set id of each object to itself
@@ -16,12 +21,11 @@ class WQUPC():
 
     def root(self, i):
         """ root of i is id[id[...id[i]...]]   # keep going until it doesn't change """
-        id = self.id
-        while i != id[i]:
+        while i != self.id[i]:
             # Make every other node in path point to its grandparent
             # (there by halving path length)
-            id[i] = id[id[i]]
-            i = id[i]
+            self.id[i] = self.id[self.id[i]]
+            i = self.id[i]
         return i
 
     def connected(self, p, q):
@@ -54,7 +58,7 @@ class Solution:
     def findCircleNum(self, isConnected):
         n = len(isConnected)
         # Initialise UF Data Structure
-        uf = WQUPC(n)
+        uf = UnionFind(n)
 
         # Call union method for connected cities
         for i in range(n):
