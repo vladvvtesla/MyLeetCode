@@ -1,6 +1,7 @@
 """
 
-Data structur: an array of integers
+Data structure: an array of integers
+                and an extra array for sizes of trees
 Union command:  connect two objects
 Find/connected query: is there a path connecting the two objects
 
@@ -16,9 +17,14 @@ connected()
 find() component identifier for p (from 0 to M-1)
 count() number of components
 
+Improvement 1: Weighted trees. We sould use an extra array for sizes of trees
+Improvement 2: Path compression. Just after computing the root of p ,
+                                 set the id of each examined node to point to that root
+
 Time complexity:
-Find: takes time proportional to depth of p and 1
+Initialize: O(N)
 Union: takes constant time, given roots
+Find: takes time proportional to depth of p and q   O(N lgN)
 """
 
 class UnionFind():
