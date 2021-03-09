@@ -30,13 +30,15 @@ Find: takes time proportional to depth of p and q   O(N lgN)
 class UnionFind():
     """" Weighted  QuickUnion with Path Compression.  Coursera Sedgewick 1 w1"""
     def __init__(self, n):
-        """ self.id is an array of integers
+        """ self.id is an array of integer
             self.id[i] is parent of i
             root of i is id[id[...id[i]...]]   # keep going until it doesn't change
         """
-        self.id = [i for i in range(n)]         # the constructor: set id of each object to itself
-        self.sz = [1,] * n                      # maintain extra array to count number of objects
-                                                # in the tree rooted at i
+        self._count = n                     # number of components
+        self.id = [i for i in range(n)]     # the constructor: set id of each object to itself
+        self.sz = [1,] * n                  # maintain extra array to count number of objects
+                                            # in the tree rooted at i
+
 
     def root(self, i):
         """ root of i is id[id[...id[i]...]]   # keep going until it doesn't change """
@@ -47,7 +49,12 @@ class UnionFind():
             i = self.id[i]
         return i
 
+    def count(self):
+        """Return the number of componets."""
+        return self._count
+
     def connected(self, p, q):
+        """Check if the items p and q have the same root or not."""
         return self.root(p) == self.root(q)
 
     def union(self, p, q):
@@ -55,10 +62,11 @@ class UnionFind():
             1) Link root of smaller tree to root of larger tree
             2) update the sz array
         """
-        i =  self.root(p)
-        j =  self.root(q)
+        i = self.root(p)
+        j = self.root(q)
         if i == j:
             return
+        self._count -= 1                # decrease number of components, if union different roots
         if self.sz[i] < self.sz[j]:
             self.id[i] = j              # change root of p
             self.sz[j] += self.sz[i]    # update size of the tree
