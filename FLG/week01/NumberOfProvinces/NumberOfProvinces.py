@@ -1,6 +1,8 @@
 """
-Runtime: 204 ms, faster than 44.55% of Python3 online submissions for Number of Provinces.
-Memory Usage: 14.8 MB, less than 53.20% of Python3 online submissions for Number of Provinces.
+Number of provinces (Medium)
+
+Runtime: 204 ms, faster than 43.35% of Python3 online submissions for Number of Provinces.
+Memory Usage: 14.5 MB, less than 96.89% of Python3 online submissions for Number of Provinces.
 """
 
 """
@@ -15,9 +17,11 @@ class UnionFind():
             self.id[i] is parent of i
             root of i is id[id[...id[i]...]]   # keep going until it doesn't change
         """
-        self.id = [i for i in range(n)]         # the constructor: set id of each object to itself
-        self.sz = [1,] * n                      # maintain extra array to count number of objects
-                                                # in the tree rooted at i
+        self._count = n                     # number of components
+        self.id = [i for i in range(n)]     # the constructor: set id of each object to itself
+        self.sz = [1,] * n                  # maintain extra array to count number of objects
+                                            # in the tree rooted at i
+
 
     def root(self, i):
         """ root of i is id[id[...id[i]...]]   # keep going until it doesn't change """
@@ -28,7 +32,12 @@ class UnionFind():
             i = self.id[i]
         return i
 
+    def count(self):
+        """Return the number of componets."""
+        return self._count
+
     def connected(self, p, q):
+        """Check if the items p and q have the same root or not."""
         return self.root(p) == self.root(q)
 
     def union(self, p, q):
@@ -40,6 +49,7 @@ class UnionFind():
         j =  self.root(q)
         if i == j:
             return
+        self._count -= 1                # decrease number of components, if union different roots
         if self.sz[i] < self.sz[j]:
             self.id[i] = j              # change root of p
             self.sz[j] += self.sz[i]    # update size of the tree
@@ -66,12 +76,8 @@ class Solution:
                 if isConnected[i][j] == 1:
                     uf.union(i,j)
 
-        # Call root method for each city and count number of unique roots
-        s = set()
-        for i in range(n):
-            root = uf.root(i)
-            s.add(root)
-        return len(s)
+        # number of unuiques provinces is equal to number of roots
+        return uf.count()
 
 
 def test_findCircleNum():
