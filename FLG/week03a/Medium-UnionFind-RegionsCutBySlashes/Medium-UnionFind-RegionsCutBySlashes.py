@@ -42,8 +42,8 @@ class UnionFind():
             1) Link root of smaller tree to root of larger tree
             2) update the sz array
         """
-        i =  self.root(p)
-        j =  self.root(q)
+        i = self.root(p)
+        j = self.root(q)
         if i == j:
             return
         self._count -= 1                # decrease number of components, if union different roots
@@ -65,10 +65,46 @@ class Solution:
     def regionsBySlashes(self, grid) -> int:
         n = len(grid)
         # Initialise UF Data Structure
-        uf = UnionFind(n)
+        uf = UnionFind(n ** 2 + 2 * n)
 
         # Call union method for connected areas
-        return None
+        for j in range(n):
+            for k in range(n):
+                print('grid',j, k, grid[j][k])
+                if k == '/':
+                    p = j*n + k                   # 3
+                    q = (n**2 + n) + k*n + j      # 9
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                    p = (n**2 + n) + (k+1)*n + j  # 11
+                    q = (j+1)*n + k               # 5
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                elif k == '\\':
+                    p = j*n + k                   # 3
+                    q = (n**2 + n) + (k+1)*n + j  # 11
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                    p = (n**2 + n) + k*n + j      # 9
+                    q = (j+1)*n + k               # 5
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                else:
+                    p = j*n + k                   # 3
+                    q = (n**2 + n) + (k+1)*n + j  # 11
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                    p = j*n + k                   # 3
+                    q = (n**2 + n) + k*n + j      # 9
+                    print('p, q', p, q)
+                    uf.union(p,q)
+                    p = j*n + k                   # 3
+                    q = (j+1)*n + k               # 5
+                    print('p, q', p, q)
+                    uf.union(p,q)
+
+
+        return uf.count()
 
 
 def test_regionsBySlashes():
