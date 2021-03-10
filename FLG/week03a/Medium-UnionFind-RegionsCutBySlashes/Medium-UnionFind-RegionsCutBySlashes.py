@@ -3,7 +3,8 @@ Regions Cut By Slashes (Medium)
 
 
 
-
+Runtime: 120 ms, faster than 90.14% of Python3 online submissions for Regions Cut By Slashes.
+Memory Usage: 14.6 MB, less than 88.99% of Python3 online submissions for Regions Cut By Slashes.
 
 """
 
@@ -18,7 +19,6 @@ class UnionFind():
         self.id = [i for i in range(n)]     # the constructor: set id of each object to itself
         self.sz = [1,] * n                  # maintain extra array to count number of objects
                                             # in the tree rooted at i
-
 
     def root(self, i):
         """ root of i is id[id[...id[i]...]]   # keep going until it doesn't change """
@@ -65,61 +65,48 @@ class Solution:
     def regionsBySlashes(self, grid) -> int:
         n = len(grid)
         # Initialise UF Data Structure
-        uf = UnionFind(n ** 2 + 2 * n)
+        uf = UnionFind(2 * (n**2 + n))
 
         # Call union method for connected areas
         for j in range(n):
             for k in range(n):
-                print('grid',j, k, grid[j][k])
-                if k == '/':
+                if grid[j][k] == '/':
                     p = j*n + k                   # 3
                     q = (n**2 + n) + k*n + j      # 9
-                    print('p, q', p, q)
                     uf.union(p,q)
                     p = (n**2 + n) + (k+1)*n + j  # 11
                     q = (j+1)*n + k               # 5
-                    print('p, q', p, q)
                     uf.union(p,q)
-                elif k == '\\':
+                elif grid[j][k] == '\\':
                     p = j*n + k                   # 3
                     q = (n**2 + n) + (k+1)*n + j  # 11
-                    print('p, q', p, q)
                     uf.union(p,q)
                     p = (n**2 + n) + k*n + j      # 9
                     q = (j+1)*n + k               # 5
-                    print('p, q', p, q)
                     uf.union(p,q)
                 else:
                     p = j*n + k                   # 3
                     q = (n**2 + n) + (k+1)*n + j  # 11
-                    print('p, q', p, q)
                     uf.union(p,q)
                     p = j*n + k                   # 3
                     q = (n**2 + n) + k*n + j      # 9
-                    print('p, q', p, q)
                     uf.union(p,q)
                     p = j*n + k                   # 3
                     q = (j+1)*n + k               # 5
-                    print('p, q', p, q)
                     uf.union(p,q)
-
 
         return uf.count()
 
 
 def test_regionsBySlashes():
     inp = [
-          [ " /", "/ " ],
-          ]
-    out = [2]
-    # inp = [
-    #      [ " /", "/ " ],
-    #      [ " /", " " ],
-    #      ["\\/", "/\\"],
-    #      ["/\\", "\\/"],
-    #      ["//", "/ "]
-    #      ]
-    # out = [2, 1, 4, 5, 3]
+         [ " /", "/ " ],
+         [ " /", "  " ],
+         ["\\/", "/\\"],
+         ["/\\", "\\/"],
+         ["//", "/ "]
+         ]
+    out = [2, 1, 4, 5, 3]
     sol = Solution()
     for i in range(len(inp)):
         test_res = sol.regionsBySlashes(inp[i])
