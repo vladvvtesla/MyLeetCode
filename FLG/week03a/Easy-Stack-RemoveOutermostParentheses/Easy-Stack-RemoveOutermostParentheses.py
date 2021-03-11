@@ -8,8 +8,9 @@ Main idea: We use LinkedListQueue
 excluding the fist and the last parentheses. "(()())" => "()()"
 4 continue for all parentheses in the input string
 
-Runtime: 104 ms, faster than 6.32% of Python3 online submissions for Remove Outermost Parentheses.
-Memory Usage: 14.3 MB, less than 64.17% of Python3 online submissions for Remove Outermost Parentheses.
+# With aux list
+# Runtime: 104 ms, faster than 6.32% of Python3 online submissions for Remove Outermost Parentheses.
+# Memory Usage: 14.3 MB, less than 64.17% of Python3 online submissions for Remove Outermost Parentheses.
 
 """
 
