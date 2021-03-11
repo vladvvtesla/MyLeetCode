@@ -44,6 +44,12 @@ class LinkedListQueue():
             self.last.next = None
         return item
 
+    def printList(self):
+        cur = self.first
+        while (cur):
+            print(cur.val, " -> ", end='')
+            cur = cur.next
+        print("")
 
 class Solution:
     def __init__(self):
