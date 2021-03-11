@@ -125,17 +125,17 @@ def test_removeOuterParentheses():
 
     # print('end my test')
 
-    # inp = ["(())"]
-    # out = ["()"]
+    inp = ["(()())(())(()(()))"]
+    out = ["()()()()(())"]
 
-    inp = ["(()())(())",
-           "(()())(())(()(()))",
-           "()()",
-           "(())"]
-    out = ["()()()",
-           "()()()()(())",
-           "",
-           "()"]
+    #inp = ["(()())(())",
+    #       "(()())(())(()(()))",
+    #       "()()",
+    #       "(())"]
+    #out = ["()()()",
+    #       "()()()()(())",
+    #       "",
+    #       "()"]
     for i in range(len(inp)):
         sol = Solution()
         test_res = sol.removeOuterParentheses(inp[i])
