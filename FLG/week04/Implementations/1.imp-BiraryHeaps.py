@@ -113,9 +113,9 @@ class Heap():
 
     def insert(self, x):
         """Insert item into heap"""
-        self.a.append(x)
+        self.a.append(x)           # O(1)
         self.sz += 1
-        self._swim(self.sz - 1)
+        self._swim(self.sz - 1)    # O(lgN)
 
     def delMax(self):
         """Return max element and delete in from heap"""
@@ -149,6 +149,7 @@ class Heap():
                 break
             else:
                 self.a[k],self.a[j] = self.a[j],self.a[k]
+                k = j                  # change k for next iteration
 
 def test_heap():
     heap = Heap()
