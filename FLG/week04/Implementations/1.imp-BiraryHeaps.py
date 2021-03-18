@@ -117,6 +117,12 @@ class Heap():
         self.sz += 1
         self._swim(self.sz - 1)    # O(lgN)
 
+    def peek(self):
+        if self.a[0]:
+            return self.a[0]
+        else:
+            return False
+
     def delMax(self):
         """Return max element and delete in from heap"""
         if not self.sz:
