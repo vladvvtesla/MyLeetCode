@@ -131,7 +131,7 @@ class BST:
         """Hibbard deletion - Sedgewick w4"""
         if x is None:
             return None
-        if key < x.key:                         # search for key
+        if key < x.key:                          # search for key
             x.left = self.delete(x.left, key)
         elif key > x.key:                        # search for key
             x.right = self.delete(x.right, key)

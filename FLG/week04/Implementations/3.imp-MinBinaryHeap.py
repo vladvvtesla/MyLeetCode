@@ -118,7 +118,7 @@ class MinHeap():
         self._swim(self.sz - 1)    # O(lgN)
 
     def peek(self):
-        if self.a[0]:
+        if self.a:
             return self.a[0]
         else:
             return False
