@@ -64,7 +64,7 @@ def test_isValidBST():
     print('test_res', test_res)
     print("Test", 3, ":", "OK\n" if test_res == False else "Failed\n")
 
-    # [5,4,6,null,null,3,7] : Expexted False
+    # [5,4,6,null,null,3,7] : Expexted False     # FIX IT !!!
     x = TreeNode(5)
     x.left = TreeNode(4)
     x.right = TreeNode(6)
