@@ -5,12 +5,17 @@ class Graph():
         self.v_num = 0          # Number of vertices
         self.e_num = 0          # Number of edges
 
+        # for DFS
+        self.marked = []      # marked[v] = true if v connected to s
+        self.edgeTo = []      # edgeTo[v] = previous vertex on path from s to v
+
 
     def createFromFile(self, filename):
         """create a graph from input stream
         graph.txt:
-        7     # Number of vertices
-        6     # Number of edges
+        8     # Number of vertices
+        7     # Number of edges
+        0-1
         1 2
         2 3
         3 4
@@ -19,7 +24,7 @@ class Graph():
         4 7
 
         Data Structure for Graph: Dict of Sets
-        1-2-3-4-5
+        0-1-2-3-4-5
               /\
              6  7
         graph = {1:{2},
@@ -34,6 +39,10 @@ class Graph():
             lines = [line.rstrip() for line in f]
         self.v_num = m = int(lines[0])        # number of vertexes
         self.e_num = n = int(lines[1])        # number of edges
+
+        self.marked = [False] * self.v_num # marked[v] = true if v connected to s
+        self.edgeTo = [False] * self.v_num # edgeTo[v] = previous vertex on path from s to v
+
         for i in range(2, n+2):               # Start from 3rd line
             v1, v2 = map(int, lines[i].split())
             for v, u in (v1, v2), (v2, v1):
@@ -105,12 +114,22 @@ class Graph():
                     count += 1
         return count/2             # each edge counted twice
 
+    def dfs(self, v):
+        """
+        Recursive DFS does the work
+        :param v:    vertex
+        :return:
+        """
+        self.marked[v] = True
+        for w in self.graph[v]:
+            if not self.marked[w]:
+                self.dfs(w)
+                self.edgeTo[w] = v
 
 
 def test_createFromFile():
     g = Graph()
     g.createFromFile('testgraph.txt')
-    print(g.graph)
 
 def test_adj(g):
     for k in g.adj(4):
@@ -127,6 +146,10 @@ def test_averagedegree(g):
 
 def test_numberOfSelfLoops(g):
     return g.numberOfSelfLoops()
+
+def test_dfs(g):
+    g.dfs(4)
+    return g.marked
 
 if __name__ == '__main__':
     g = Graph()
@@ -145,11 +168,19 @@ if __name__ == '__main__':
 
     test_res = test_averagedegree(g)
     # print('test_res', test_res)
-    print("Test", 6, ":", "OK\n" if test_res == 1.7142857142857142 else "Failed\n")
+    print("Test", 6, ":", "OK\n" if test_res == 1.75 else "Failed\n")
 
     test_res = test_numberOfSelfLoops(g)
     # print('test_res', test_res)
     print("Test", 7, ":", "OK\n" if test_res == 0.0 else "Failed\n")
+
+    test_dfs(g)
+    test_res = g.edgeTo
+    # print('test_res', test_res)
+    print("Test", 8, ":", "OK\n" if test_res == [1, 2, 3, 4, False, 4, 4, 4] else "Failed\n")
+
+
+
 
 
 
