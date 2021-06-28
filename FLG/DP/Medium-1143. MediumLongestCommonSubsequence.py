@@ -1,5 +1,5 @@
 """
-1143. Medium - Longest Common Subsequence
+1143.Medium - Longest Common Subsequence
 
 Main Idea: DP
 Explonation:
