@@ -1,25 +1,25 @@
 class Queue:
     def __init__(self):
-        self.inbound_stack = []
-        self.outbound_stack = []
+        self.first = []     # inbound stack
+        self.second = []    # outbound_stack
 
     def enqueue(self, data):
-        self.inbound_stack.append(data)
+        self.first.append(data)
 
     def dequeue(self):
-        if not self.outbound_stack:
-            while self.inbound_stack:
-                self.outbound_stack.append(self.inbound_stack.pop())
-        return self.outbound_stack.pop()
+        if not self.second:
+            while self.first:
+                self.second.append(self.first.pop())
+        return self.second.pop()
 
     def peek(self):
-        if not self.outbound_stack:
-            while self.inbound_stack:
-                self.outbound_stack.append(self.inbound_stack.pop())
-        return self.outbound_stack[len(self.outbound_stack)-1]
+        if not self.second:
+            while self.first:
+                self.second.append(self.first.pop())
+        return self.second[len(self.second)-1]
 
     def empty(self):
-        if self.outbound_stack or self.inbound_stack:
+        if self.second or self.first:
             return False
         else:
             return True
@@ -30,11 +30,11 @@ if __name__ == '__main__':
     queue.enqueue(5)
     queue.enqueue(6)
     queue.enqueue(7)
-    print(queue.inbound_stack)
+    print(queue.first)
     queue.dequeue()
-    print(queue.inbound_stack)
-    print(queue.outbound_stack)
+    print(queue.first)
+    print(queue.second)
     queue.dequeue()
-    print(queue.outbound_stack)
+    print(queue.second)
     print(queue.peek())
     print(queue.empty())
