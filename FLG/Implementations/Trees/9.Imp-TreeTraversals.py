@@ -37,13 +37,13 @@ class Tree:
     def level_order_traversal(self, root):    # breadth_first_traversal
         from collections import deque
         list_of_nodes = []
-        traversal_queue = deque([root])
+        queue = deque([root])
 
-        while len(traversal_queue) > 0:
-            node = traversal_queue.popleft()
+        while len(queue) > 0:
+            node = queue.popleft()
             list_of_nodes.append(node.data)
-            if node.left_child:
-                traversal_queue.append(node.left)
-            if node.right_child:
-                traversal_queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
         return list_of_nodes
