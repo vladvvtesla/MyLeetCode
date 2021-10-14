@@ -8,7 +8,6 @@ class Tree:
     def __init__(self):
         self.root = None
 
-
     def inorder(self, root):
         cur = root
         if cur is None:
@@ -34,7 +33,7 @@ class Tree:
         print(cur.data)
 
 
-    def level_order_traversal(self, root):    # breadth_first_traversal
+    def levelorder(self, root):    # breadth_first_traversal
         from collections import deque
         list_of_nodes = []
         queue = deque([root])
