@@ -10,28 +10,28 @@ class Tree:
 
 
     def inorder(self, root):
-        current = root
-        if current is None:
+        cur = root
+        if cur is None:
             return
-        self.inorder(current.left)
-        print(current.data)
-        self.inorder(current.right)
+        self.inorder(cur.left)
+        print(cur.data)
+        self.inorder(cur.right)
 
     def preorder(self, root):
-        current = root
-        if current is None:
+        cur = root
+        if cur is None:
             return
-        print(current.data)
-        self.preorder(current.left)
-        self.preorder(current.right)
+        print(cur.data)
+        self.preorder(cur.left)
+        self.preorder(cur.right)
 
     def postorder(self, root):
-        current = root
-        if current is None:
+        cur = root
+        if cur is None:
             return
-        self.postorder(current.left)
-        self.postorder(current.right)
-        print(current.data)
+        self.postorder(cur.left)
+        self.postorder(cur.right)
+        print(cur.data)
 
 
     def level_order_traversal(self, root):    # breadth_first_traversal
