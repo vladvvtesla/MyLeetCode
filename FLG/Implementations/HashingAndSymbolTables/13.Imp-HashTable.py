@@ -14,7 +14,7 @@ class HashTable:
         hv = 0             # hash value
         for ch in key:
             hv += mult * ord(ch)
-        mult += 1
+            mult += 1
         return hv % self.size
 
     def put(self, key, value):
@@ -33,16 +33,24 @@ class HashTable:
         while self.slots[h] is not None:
             if self.slots[h].key is key:
                 return self.slots[h].value
-            h = (h+ 1) % self.size
+            h = (h + 1) % self.size
         return None
+
+    def __setitem__(self, key, value):
+        self.put(key, value)
+
+    def __getitem__(self, key):
+        return self.get(key)
 
 if __name__ == '__main__':
     ht = HashTable()
-    ht.put("good", "eggs")
-    ht.put("better", "ham")
-    ht.put("best", "spam")
-    ht.put("ad", "do not")
-    ht.put("ga", "collide")
+    ht["good"] = "eggs"
+    ht["better"] = "ham"
+    ht["best"] = "spam"
+    ht["ad"] = "do not"
+    ht["ga"] = "collide"
     for key in ("good", "better", "best", "worst", "ad", "ga"):
-        v = ht.get(key)
-    print(v)
+        v = ht[key]
+        print(v)
+    print("The number of elements is: {}".format(ht.count))
+
