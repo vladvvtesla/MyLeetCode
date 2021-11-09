@@ -71,7 +71,7 @@ def test_quicksort():
 
     a = [6,2,9,2,5]
     a_sorted = [2,2,5,6,9]
-    random.shuffle(a)             # Shuffle array only onсу
+    random.shuffle(a)             # Shuffle array only onсe
     quicksort(a, 0, len(a)-1)
     print("Test", "1.", "OK" if a == a_sorted else "Failed")
     print()
