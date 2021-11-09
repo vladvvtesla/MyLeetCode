@@ -2,6 +2,8 @@
 Quick Select
 
 Search for the kth-smallest item
+
+The worst-case performance of a randomized selection algorithm is O(n^2 )
 """
 
 def partition(arr, lo, hi):
