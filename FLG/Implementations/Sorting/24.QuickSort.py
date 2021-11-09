@@ -1,6 +1,11 @@
 """
 3-way quicksort: Python implementation
 
+the QuickSort algorithm does the following:
+1. Selects a pivot.
+2. Partitions the unsorted list around the pivot.
+3. Recursively sorts the two halves of the partitioned list using step 1 and step 2.
+
 Duplicate keys
 Mergesort with duplicate keys. Always between  1/2 NlgN and NlgN compares
 
@@ -21,6 +26,7 @@ Basic algorithm - quick sort
       Large arrays: middle entry
       medium arrays: median of 3
       large arrays: Tukey's ninther
+
 """
 
 def quicksort(a, lo, hi):
