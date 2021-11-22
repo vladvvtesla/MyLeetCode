@@ -9,6 +9,8 @@ def merge(a, b):
     i = j = 0
     c = []
 
+    if a[-1] <= b[0]: return a + b      # Stop if already sorted:
+
     while i < len(a) and j < len(b):
         if a[i] < b[j]:
             c.append(a[i])
@@ -29,9 +31,9 @@ def merge(a, b):
 
 
 def merge_sort(a):
-    if len(a) == 1:
+    if len(a) <= 1:
         return a
-    mid = int((len(a))/2)
+    mid = len(a) // 2
 
     l = a[:mid]
     r = a[mid:]
@@ -43,11 +45,12 @@ def merge_sort(a):
 
 
 def test_merge_sort():
-    a = [4, 2, 5, 2, 1]
-    a_sorted = [1, 2, 2, 4, 5]
-    test_res = merge_sort(a)
-    print('test_res:', test_res)
-    print("OK" if test_res == a_sorted else "Failed")
+    inp = [[4, 2, 5, 2, 1], [4, 2, 5, 2, 1, 6], [0]]
+    out = [[1, 2, 2, 4, 5], [1, 2, 2, 4, 5, 6], [0]]
+    for i in range(len(inp)):
+        test_res = merge_sort(inp[i])
+        print('test_res:', test_res)
+        print("Test " + str(i+1) + ": ", "OK\n" if test_res == out[i] else "Failed\n")
 
 
 if __name__ == '__main__':
