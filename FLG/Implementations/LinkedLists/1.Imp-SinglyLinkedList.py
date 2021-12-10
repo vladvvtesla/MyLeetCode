@@ -16,7 +16,7 @@ class SinglyLinkedList:
         node = Node(data)
         if self.head:
             self.head.next = node
-            self.head = node
+            self.tail = node
         else:
             self.tail = node
             self.head = node
