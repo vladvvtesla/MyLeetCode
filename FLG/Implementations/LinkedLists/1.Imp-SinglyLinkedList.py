@@ -15,43 +15,43 @@ class SinglyLinkedList:
         # Time complexity O(1)
         node = Node(data)
         if self.head:
-            self.head.next = node
+            self.tail.next = node
             self.tail = node
         else:
-            self.tail = node
             self.head = node
+            self.tail = node
         self.size += 1
 
     def size(self):
         count = 0
-        current = self.tail
-        while current:
+        cur = self.tail
+        while cur:
             count += 1
-            current = current.next
+            cur = cur.next
         return count
 
     def iter(self):
-        current = self.tail
-        while current:
-            val = current.data
-            current = current.next
+        cur = self.head
+        while cur:
+            val = cur.data
+            cur = cur.next
             yield val
 
     def delete(self, data):
         """ Delete node by data it contains.
             It should take a O(n) to delete a node."""
-        current = self.tail
+        cur = self.tail
         prev = self.tail
-        while current:
-            if current.data == data:
-                if current == self.tail:
-                    self.tail = current.next
+        while cur:
+            if cur.data == data:
+                if cur == self.tail:
+                    self.tail = cur.next
                 else:
-                    prev.next = current.next
+                    prev.next = cur.next
                 self.size -= 1
                 return
-            prev = current
-            current = current.next
+            prev = cur
+            cur = cur.next
 
     def search(self, data):
         """ Check whether a list contains an item"""
@@ -74,9 +74,12 @@ if __name__ == '__main__':
     words.append('spam')
 
     # List traversal
-    current = words.tail
+    # current = words.tail
     for word in words.iter():
         print(word)
 
     # Size
     print('size:', words.size)
+
+    # Search by data
+    print('There is "egg" in the List:', words.search('egg'))
