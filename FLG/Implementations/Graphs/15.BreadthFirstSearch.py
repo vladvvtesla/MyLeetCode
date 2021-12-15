@@ -45,21 +45,20 @@ nodes while |E| is the number of edges in the graph.
 from collections import deque
 
 def bfs(graph, root):
-    visited_vertices = list()
+    visited = [root]
     graph_queue = deque([root])
-    visited_vertices.append(root)
     node = root
 
     while len(graph_queue) > 0:
         node = graph_queue.popleft()
         adj_nodes = graph[node]
-        remaining_elements = set(adj_nodes).difference(set(visited_vertices))
-        if len(remaining_elements) > 0:
-            for elem in sorted(remaining_elements):
-                visited_vertices.append(elem)
-                graph_queue.append(elem)
+        remain_el = set(adj_nodes).difference(set(visited))
+        if len(remain_el) > 0:
+            for el in sorted(remain_el):
+                visited.append(el)
+                graph_queue.append(el)
 
-    return visited_vertices
+    return visited
 
 if __name__ == '__main__':
     # The adjacency list for the graph is as follows:
