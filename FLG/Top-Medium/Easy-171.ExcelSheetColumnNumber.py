@@ -24,11 +24,9 @@ class Solution:
             aux[char] = count
             count += 1
 
-
-        res = 0     #   AB = 26  + 2 =  1 * 26**1 + 2*26**0
+        res = 0                          #   AB = 26  + 2 =  1 * 26**1 + 2*26**0
         power = len(ilist) - 1
         for x in ilist:
-            print('x', x)
             res += aux[x] * (26 ** power)
             power -= 1
 
