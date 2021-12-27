@@ -34,8 +34,7 @@ components, and finding the bridges of a graph, among others.
 
 def dfs(graph, root):
     visited = list()
-    graph_stack = list()
-    graph_stack.append(root)
+    graph_stack = [root]
     node = root
 
     while len(graph_stack) > 0:
