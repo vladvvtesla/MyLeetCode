@@ -34,23 +34,23 @@ components, and finding the bridges of a graph, among others.
 
 def dfs(graph, root):
     visited = list()
-    graph_stack = [root]
+    stack = [root]
     node = root
 
-    while len(graph_stack) > 0:
+    while stack:
         if node not in visited:
             visited.append(node)
         adj_nodes = graph[node]
         if set(adj_nodes).issubset(set(visited)):
-            graph_stack.pop()
-            if len(graph_stack) > 0:
-                node = graph_stack[-1]
+            stack.pop()
+            if len(stack) > 0:
+                node = stack[-1]
             continue
         else:
             remain_els = set(adj_nodes).difference(set(visited))
 
             first = sorted(remain_els)[0]
-            graph_stack.append(first)
+            stack.append(first)
             node = first
 
     return visited
