@@ -49,9 +49,9 @@ def dfs(graph, root):
         else:
             remain_els = set(adj_nodes).difference(set(visited))
 
-            first_adj_node = sorted(remain_els)[0]
-            graph_stack.append(first_adj_node)
-            node = first_adj_node
+            first = sorted(remain_els)[0]
+            graph_stack.append(first)
+            node = first
 
     return visited
 
