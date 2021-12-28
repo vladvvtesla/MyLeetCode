@@ -46,17 +46,17 @@ from collections import deque
 
 def bfs(graph, root):
     visited = [root]
-    graph_queue = deque([root])
+    q = deque([root])
     node = root
 
-    while len(graph_queue) > 0:
-        node = graph_queue.popleft()
+    while q:
+        node = q.popleft()
         adj_nodes = graph[node]
         remain_el = set(adj_nodes).difference(set(visited))
         if len(remain_el) > 0:
             for el in sorted(remain_el):
                 visited.append(el)
-                graph_queue.append(el)
+                q.append(el)
 
     return visited
 
