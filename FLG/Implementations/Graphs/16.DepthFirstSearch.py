@@ -43,12 +43,11 @@ def dfs(graph, root):
         adj_nodes = graph[node]
         if set(adj_nodes).issubset(set(visited)):
             stack.pop()
-            if len(stack) > 0:
+            if stack:
                 node = stack[-1]
-            continue
+                continue
         else:
             remain_els = set(adj_nodes).difference(set(visited))
-
             first = sorted(remain_els)[0]
             stack.append(first)
             node = first
