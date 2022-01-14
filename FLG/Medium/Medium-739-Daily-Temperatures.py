@@ -33,12 +33,12 @@ Memory Usage: 24.9 MB, less than 84.91% of Python3 online submissions for Daily 
 class Solution:
     def dailyTemperatures(self, temperatures):
         answers = [0]*(len(temperatures))
-        stack = [0]
-        for k in range(1, len(temperatures)):
-            if temperatures[k] > temperatures[k-1]:
-                while stack and temperatures[k] > temperatures[stack[-1]]:
-                    answers[stack[-1]] = k - stack[-1]     # answer[5] = 6-5 = 1
-                    stack.pop()
+        stack = []
+        for k,val in enumerate(temperatures):
+            if val > temperatures[k-1]:
+                while stack and val > temperatures[stack[-1]]:
+                    idx = stack.pop()
+                    answers[idx] = k - idx     # answer[5] = 6-5 = 1
             stack.append(k)
 
         return answers
